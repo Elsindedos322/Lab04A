@@ -4,15 +4,19 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -60,12 +64,28 @@ fun GreetingPreview() {
 
 @Composable
 fun ListaTareas(tareas: List<String>) {
-    LazyColumn {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
         items(tareas.size) { index ->
-            Text(text = tareas[index], modifier = Modifier.padding(8.dp))
+            Card(
+                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = tareas[index],
+                    modifier = Modifier.padding(16.dp),
+                    fontSize = 18.sp
+                )
+            }
         }
     }
 }
+
+
 
 @Composable
 fun BotonAgregar(onClick: () -> Unit) {
@@ -95,27 +115,6 @@ fun ConfirmacionEliminar(
                     Text("No")
                 }
             }
-        )
-    }
-}
-
-
-fun ViewHolaCurso() {
-    Column(
-        modifier = Modifier
-            .fillMaxWith() // ❌ Error: debería ser fillMaxWidth()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "Welcome to the Course!",
-            fontSize = 28.sp,
-            fontWeight = FontWeigh.Bold // ❌ Error: debería ser FontWeight.Bold
-        )
-        Spacer(modifier = Modifier.heigh(16.dp)) // ❌ Error: debería ser height
-        Text(
-            text = "Hello, Student!",
-            fontSize = 20.xD // ❌ Error: debería ser 20.sp
         )
     }
 }
