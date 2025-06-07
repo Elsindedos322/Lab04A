@@ -15,15 +15,19 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -94,27 +98,32 @@ fun BotonAgregar(onClick: () -> Unit) {
     }
 }
 
+
 @Composable
-fun ConfirmacionEliminar(
-    mostrar: Boolean,
-    onConfirmar: () -> Unit,
-    onCancelar: () -> Unit
-) {
+fun ConfirmacionEliminar(mostrar: Boolean, onConfirmar: () -> Unit, onCancelar: () -> Unit) {
     if (mostrar) {
         AlertDialog(
             onDismissRequest = onCancelar,
-            title = { Text("Eliminar tarea") },
-            text = { Text("¿Estás seguro de eliminar esta tarea?") },
+            title = {
+                Text("Eliminar tarea", fontWeight = FontWeight.Bold, fontSize = 20.sp)
+            },
+            text = {
+                Text("¿Estás seguro de eliminar esta tarea?", fontSize = 16.sp)
+            },
             confirmButton = {
-                Button(onClick = onConfirmar) {
-                    Text("Sí")
+                Button(
+                    onClick = onConfirmar,
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
+                ) {
+                    Text("Sí", color = Color.White)
                 }
             },
             dismissButton = {
-                Button(onClick = onCancelar) {
+                OutlinedButton(onClick = onCancelar) {
                     Text("No")
                 }
             }
         )
     }
 }
+
